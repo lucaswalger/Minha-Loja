@@ -10,7 +10,33 @@ import Alert from 'react-bootstrap/Alert'
 // Importação do ícone de logn
 import { BsBoxArrowInRight } from "react-icons/bs";
 
+// importando o hook para verificar o login, vindo de useUsuários
+import { useVerificaLogin } from '../hooks/useUsuarios'
+
+// Importando a função de useForm do react-hook-form
+import {useForm} from "react-hook-form"
+
 const Login = () => {
+// register = cria um objeto com os valores retirados do input
+// handleSubmit = função que prepara os dados para serem enviados para o formulário
+// formstate(errors) = objeto que guarda uma lista de erros um aconteram na tentativa
+
+const {register, handleSubmit, formState:{errors}} = useForm();
+
+  // Caso o envio dê certo
+  // data = objeto com todas as informações preenchidas do formulário
+  const onSubmit = () => {
+    console.log("Dados enviados",data)
+  }
+  
+  // Caso o envio dê errado
+  // errors = objeto com todods os erros do envio
+  const onError = () => {
+    console.log("Erros", errors)
+  }
+
+  
+
   return (
     <div>
       <Container className="justify-content-center align-content-center min-vh-100">
