@@ -1,5 +1,4 @@
 // Importação dos componentes do bootstrap
-// Importação dos componentes do bootstrap
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -18,12 +17,24 @@ import { useVerificaLogin } from "../hooks/useUsuarios";
 import { useForm } from "react-hook-form";
 
 //Importando o useState para tratar de variáveis
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // importação do Navigate para transitar entre as páginas
 import { useNavigate } from "react-router-dom"
 
+// Importar as informações do contexto autenticação de usuário
+import { AuthContext } from '../contexts/UserContext.jsx'
+import { useContext } from "react";
+
 const Login = () => {
+  // Usa as variáveis de contexto do usuário
+  const { logout } = useContext(AuthContext)
+
+  //Assim que entrar na página, o localStorage é resetado
+  useEffect(()=>{
+    logout()
+  },[])
+
   // register = cria um objeto com os valores retirados dos inputs
   // handleSumbit = envia os dados formulário, caso dê erro ou sucesso
   // formState { errors } = objeto que guarda uma lista de erros que aconteceram na tentativa do envio
