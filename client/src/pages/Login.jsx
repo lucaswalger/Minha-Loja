@@ -13,14 +13,15 @@ import { BsBoxArrowInRight } from "react-icons/bs";
 // importando o hook para verificar o login, vindo do useUsuarios
 import { useVerificaLogin } from "../hooks/useUsuarios";
 
-// Importando a função useform do pacote hook-form
-import { useForm } from "react-hook-form";
 
 //Importando o useState para tratar de variáveis
 import { useEffect, useState } from "react";
 
 // importação do Navigate para transitar entre as páginas
 import { useNavigate } from "react-router-dom"
+
+// Importando a função useform do pacote hook-form
+import { useForm } from "react-hook-form";
 
 // Importar as informações do contexto autenticação de usuário
 import { AuthContext } from '../contexts/UserContext.jsx'
@@ -82,7 +83,7 @@ const Login = () => {
     <div>
       <Container className="justify-content-center align-content-center min-vh-100">
         {/* Linha para campos de login e icone */}
-        <Row className="bg-info">
+        <Row className="bg-black">
           {/* Coluna com o ícone da página */}
           <Col>
             {/* ícone de login */}
@@ -133,7 +134,7 @@ const Login = () => {
 
               {/* Botão pra envio */}
               <Button
-                variant="primary"
+                variant="danger"
                 type="submit"
                 className="mb-5"
                 size="lg"
