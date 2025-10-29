@@ -9,6 +9,9 @@ import Image from "react-bootstrap/Image";
 // Importando a função useform do pacote hook-form
 import { useForm } from "react-hook-form";
 
+// Importando o hook de produtos
+import { useListaCategorias, useListaMedidas } from "../../hooks/useProdutos"
+
 const FormularioProduto = (props) => {
   // register = cria um objeto com os valores retirados dos inputs
   // handleSumbit = envia os dados formulário, caso dê erro ou sucesso
@@ -18,6 +21,12 @@ const FormularioProduto = (props) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  // Lista de categorias
+  const cates = useListaCategorias()
+
+  // Lista de medidas
+  const medis = useListaMedidas()
 
   return (
     <div className="text-center">
@@ -91,7 +100,19 @@ const FormularioProduto = (props) => {
             {/* Fim de caixinha de descrição */}
 
             {/* Caixinha de categoria */}
-
+              <FloatingLabel controlId="FI-CATEGORIAS" label="Categoria" className="mb-5">
+                <Form.Select
+                  {...register("categoria", {
+                    validate: (value) => value !== "0" || "Escolha uma categoria"
+                  })}
+                >
+                  <option value="0"> Escolha uma categoria </option>
+                  {cates.map((cat)=>(
+                      <option key={cat.id} value={cat.nome}> {cat.nome} </option>
+                  ))}
+                </Form.Select>
+                {errors.categoria && <p className="error"> {errors.categoria.message} </p>}
+              </FloatingLabel>
             {/* Fim de caixinha de categoria */}
 
             {/* Caixinha de marca */}
@@ -134,7 +155,66 @@ const FormularioProduto = (props) => {
             </FloatingLabel>
             {/* Fim de caixinha de fornecedor */}
           </Col>
-          <Col md={12} lg={6}></Col>
+          <Col md={12} lg={6}>
+          
+             {/* Caixinha de quantidade */}
+            <FloatingLabel controlId="FI-QUANTIDADE" label="Quantidade" className="mb-5">
+              <Form.Control
+                type="number"
+                {...register("quantidade", {
+                  required: "A quantidade é obrigatória",
+                  min: {
+                    value: 1,
+                    message: "A quantidade deve ser maior que 0",
+                  },
+                })}
+              ></Form.Control>
+              {errors.quantidade && <p className="error"> {errors.quantidade.message} </p>}
+            </FloatingLabel>
+            {/* Fim de caixinha de quantidade */}         
+              <Row>{/*  Primeira Linha */}
+              <Col>{/*  Primeira coluna */}
+              {/* Caixinha de tamanho */}
+            <FloatingLabel controlId="FI-TAMANHO" label="Tamanho" className="mb-5">
+              <Form.Control
+                type="number"
+                {...register("amanho", {
+                  required: "A tamnaho é obrigatória",
+                  min: {
+                    value: 1,
+                    message: "A tamanho deve ser maior que 0",
+                  },
+                })}
+              ></Form.Control>
+              {errors.tamanho && <p className="error"> {errors.tamanho.message} </p>}
+            </FloatingLabel>
+            {/* Fim de caixinha de tamanho */}         
+              </Col>
+              <Col>
+              {/* Caixinha de quantidade */}
+            <FloatingLabel controlId="FI-MEDIDA" label="Medida" className="mb-5">
+              <Form.Control
+                type="number"
+                {...validate (medida), {
+                  required: "A medida é obrigatória",
+                  min: {
+                    value: 1,
+                    message: "A qmedida deve ser maior que 0",
+                  },
+                })}
+              ></Form.Control>
+              {errors.medida && <p className="error"> {errors.medida.message} </p>}
+            </FloatingLabel>
+            {/* Fim de caixinha de quantidade */}         
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+              </Col>
+              <Col>
+              </Col>
+            </Row>
+          </Col>
         </Row>
       </Form>
     </div>
