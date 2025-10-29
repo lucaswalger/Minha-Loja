@@ -10,13 +10,13 @@ import Image from "react-bootstrap/Image";
 import { useForm } from "react-hook-form";
 
 // Importando o hook de produtos
-import { useListaCategorias, useListaMedidas } from "../../hooks/useProdutos";
+import { useListaCategorias, useListaMedidas } from "../../hooks/useProduto";
 import { useInserirProduto } from "../../hooks/useProduto";
 
 const FormularioProduto = (props) => {
   // IMPORTAÇÃO DAS FUNÇÕES VINDAS DO HOOK USEPRODUTOS
   // Usando a função de inserir produtos
-  const { inserirProduto } = useInserirProduto
+  const { inserirProduto } = useInserirProduto()
   // register = cria um objeto com os valores retirados dos inputs
   // handleSumbit = envia os dados formulário, caso dê erro ou sucesso
   // formState { errors } = objeto que guarda uma lista de erros que aconteceram na tentativa do envio
@@ -39,9 +39,30 @@ const FormularioProduto = (props) => {
   // Variavel para armazenar o link da imagem vindo do input
   const imagemAtual = watch("imagemUrl")
 
+  // FUNÇÕES QUE LIDAM COM O SUCESSO OU ERRO DO FORMULÁRIO
+  // Função pra caso dê certo na validação do formulário
+  // data é o objetivo com as informações dos campos do formulário
+
+  const onSubmit = (data) => {
+    console.log("Dados:",data)
+    if (props.page === "cadastro"){
+    //  Envia o objeto data para o hook inserir produto
+    inserirProduto(data)
+    alert("Produto cadastrado com sucesso")
+    }
+    else{
+      // Depois nóis vê
+    }
+  }
+
+  // Caso tenha algum erro no formulário, mostra as mensagens de erro nos campos
+  const onError = (errors) => {
+    console.log("Erros:", errors)
+  }
+
   return (
     <div className="text-center">
-      <Form className="mt-3 w-full" onSubmit={""}>
+      <Form className="mt-3 w-full" onSubmit={handleSubmit(onSubmit, onError)}>
         <Row>
           <Col md={12} lg={6}>
             {/* Caixinha de SKU */}
