@@ -10,13 +10,31 @@ import Image from "react-bootstrap/Image";
 import { useForm } from "react-hook-form";
 
 // Importando o hook de produtos
-import { useListaCategorias, useListaMedidas } from "../../hooks/useProduto";
-import { useInserirProduto } from "../../hooks/useProduto";
+import { useListaCategorias, useListaMedidas, useInserirProduto, useAtualizarProduto, useBuscarProdutopPorID } from "../../hooks/useProdutos";
+
+// Navigate - transitar entre paginas, params - pegar o id fornecido na url
+import { useNavigate, useParams } from "react-router-dom";
+
+// UseState - monitorar variáveis e useffect pra realizar algo quando o componente carregar
+import { useState, useEffect } from "react";
 
 const FormularioProduto = (props) => {
+
   // IMPORTAÇÃO DAS FUNÇÕES VINDAS DO HOOK USEPRODUTOS
-  // Usando a função de inserir produtos
+  // Usando a função de inserir produto vinda do hook
   const { inserirProduto } = useInserirProduto()
+
+  // usando a função de buscar o produto e atualizar
+  const {buscarProdutoPorID} = useBuscarProdutopPorID();
+  const {atualizarProduto} = useAtualizarProduto();
+
+  // Guardando o id do produto vindo da url
+  const {id} = useParams();
+
+
+  // Navigate para trocar de paginas
+  const navigate = useNavigate();
+
   // register = cria um objeto com os valores retirados dos inputs
   // handleSumbit = envia os dados formulário, caso dê erro ou sucesso
   // formState { errors } = objeto que guarda uma lista de erros que aconteceram na tentativa do envio
@@ -36,33 +54,30 @@ const FormularioProduto = (props) => {
   // Variavel de produto sem imagem
   const linkImagem = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA13yHQQqIo0itjIvx5np_T1BJcqtKSwErqQ&s"
 
-  // Variavel para armazenar o link da imagem vindo do input
+  //Variavel pra armazenar o link da imagem, vindo do input
   const imagemAtual = watch("imagemUrl")
 
   // FUNÇÕES QUE LIDAM COM O SUCESSO OU ERRO DO FORMULÁRIO
   // Função pra caso dê certo na validação do formulário
-  // data é o objetivo com as informações dos campos do formulário
-
+  // data é o objeto com as informações dos campos do formulário
   const onSubmit = (data) => {
-    console.log("Dados:",data)
-    if (props.page === "cadastro"){
-    //  Envia o objeto data para o hook inserir produto
-    inserirProduto(data)
-    alert("Produto cadastrado com sucesso")
-    }
-    else{
-      // Depois nóis vê
-    }
+      console.log("Dados:", data)
+      if (props.page === "cadastro") {
+        //Envia o objeto data para o hook inserir produto
+        inserirProduto(data)
+        alert("Produto cadastrado com sucesso")
+      }
+      else {
+        // Depois nóis vê
+      }
   }
-
   // Caso tenha algum erro no formulário, mostra as mensagens de erro nos campos
   const onError = (errors) => {
-    console.log("Erros:", errors)
+      console.log("Erros:" , errors);
   }
-
   return (
     <div className="text-center">
-      <Form className="mt-3 w-full" onSubmit={handleSubmit(onSubmit, onError)}>
+      <Form className="mt-3 w-full" onSubmit={handleSubmit( onSubmit , onError )}>
         <Row>
           <Col md={12} lg={6}>
             {/* Caixinha de SKU */}
@@ -344,7 +359,11 @@ const FormularioProduto = (props) => {
                       </Form.Control>
                       {errors.imagemUrl && (<p className="error"> {errors.imagemUrl.message}</p>)}
                     </FloatingLabel>
-                    <Image width={200} height={200} rounded src={imagemAtual == "" ? linkImagem : imagemAtual}/>
+                    <Image 
+                    width={200} 
+                    height={200} 
+                    rounded 
+                    src={imagemAtual == "" ? linkImagem : imagemAtual}/>
               </Form.Group>
             {/* Fim de caixinha de imagem */}
           </Col>
