@@ -189,7 +189,7 @@
     {
       "id": "014b",
       "nome": "Café",
-      "sku": "cnasjkcnao",
+      "SKU": "cnasjkcnao",
       "descricao": "Café cafu",
       "categoria": "Saúde e Beleza",
       "marca": "Cafuso",
@@ -203,7 +203,7 @@
     },
     {
       "id": "e12a",
-      "sku": "789100",
+      "SKU": "789100",
       "nome": "Maria das Graças",
       "descricao": "é um bolo, dentro de um pote",
       "categoria": "Eletrônicos",
@@ -218,7 +218,7 @@
     },
     {
       "id": "cac5",
-      "sku": "1426478954",
+      "SKU": "1426478954",
       "nome": "Creme para careca",
       "descricao": "Ilustre sua careca",
       "categoria": "Saúde e Beleza",
@@ -233,7 +233,7 @@
     },
     {
       "id": "e50c",
-      "sku": "0123456789",
+      "SKU": "0123456789",
       "nome": "Console",
       "descricao": "Fique feliz com esse brinquedo",
       "categoria": "Saúde e Beleza",
@@ -245,6 +245,21 @@
       "precoCusto": "35",
       "precoVenda": "46",
       "imagemUrl": "https://http2.mlstatic.com/D_NQ_NP_825521-MLB85388716834_062025-O-original-kid-bengala-pnis-vibrador-pinto-consolo-negro.webp"
+    },
+    {
+      "nome": "Oruam",
+      "descricao": "Drogado retardado que só toma no cu",
+      "categoria": "Livros e papelaria",
+      "imagemUrl": "https://billboard.com.br/wp-content/uploads/2024/06/Oruam-ReproducaoInstagram.png",
+      "precoVenda": "2",
+      "precoCusto": "1",
+      "marca": "Doente mental",
+      "tamanho": "250",
+      "medida": "mL",
+      "sku": "45781246745",
+      "quantidade": "1",
+      "fornecedor": "Lixo ambulante",
+      "id": "4373"
     }
   ],
   "categorias": [
